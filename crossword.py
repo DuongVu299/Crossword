@@ -243,5 +243,4 @@ def crossword(l):
 
 
 crossword(l)
-print(placed_words)
-print(unplaced_words)
+input("")
