@@ -3,7 +3,8 @@
 # SECTION 6
 
 blank = " "
-board = [[blank] * 20 for i in range(20)]                       # Create a 20x20 grid
+board_size = int(input("How big do you want the grid?"))
+board = [[blank] * board_size for i in range(board_size)]                       # Create a 20x20 grid
 
 num_words = int(input("How many words to make crossword: "))
 l = []
@@ -19,7 +20,7 @@ def printboard(board):
     Assumes the parameter board is a 20x20 2 dimensional array,
     Print every element of that array into a grid.
     '''    
-    board_size = 20
+    #board_size = 20
     for y in range(-2, board_size + 2):
         for x in range(-1, board_size + 1):
             if y == -2 or y == board_size + 1:
@@ -46,8 +47,8 @@ def addFirstWord(board, word):
     Assumes the parameter: board is a 20x20 2d array, word is a string.
     Add the word to the center of the grid.
     '''
-    col = 20 // 2 - len(word) // 2
-    row = 20 // 2
+    col = board_size // 2 - len(word) // 2
+    row = board_size // 2
 
     for x in range(col, len(word) + col):
         board[x][row] = word[x - col]
@@ -62,10 +63,10 @@ def checkvertical(board, word, row, col):
     Check if the word can be added to the board vertically at the given row and column.
     '''
     blank = 0
-    if len(word) + row > 20:
+    if len(word) + row > board_size:
         return False
         
-    if row < 20 - len(word):
+    if row < board_size - len(word):
         if board[col][row + len(word)] != " ":
             return False
     if row > 0:
@@ -73,7 +74,7 @@ def checkvertical(board, word, row, col):
             return False
 
     for i in range(row, len(word) + row):
-        if i >= 20:
+        if i >= board_size:
             return False
         else:
             if board[col][i] == " ":
@@ -107,8 +108,8 @@ def addvertical(board, word):
     word is a string,
     Add the word to the grid vertically.
     '''
-    for col in range(19):
-        for row in range(20 - len(word) + 1):
+    for col in range(board_size - 1):
+        for row in range(board_size - len(word) + 1):
             if checkvertical(board, word, row, col):
                 for i in range(row, len(word) + row):
                     board[col][i] = word[i - row]
@@ -127,10 +128,10 @@ def checkhorizontal(board, word, row, col):
     Check if the word can be added to the board horizontally at the given row and column.
     '''
     blank = 0
-    if len(word) + col > 20:
+    if len(word) + col > board_size:
         return False
 
-    if col < 20 - len(word):
+    if col < board_size - len(word):
         if board[col + len(word)][row] != " ":
             return False
     if col > 0:
@@ -138,7 +139,7 @@ def checkhorizontal(board, word, row, col):
             return False
 
     for i in range(col, len(word) + col):
-        if i >= 20:
+        if i >= board_size:
             return False
         else:
             if board[i][row] == " ":
@@ -172,8 +173,8 @@ def addhorizontal(board, word):
     word is a string,
     Add the word to the grid horizontally.
     '''
-    for row in range(19):
-        for col in range(20 - len(word) + 1):
+    for row in range(board_size - 1):
+        for col in range(board_size - len(word) + 1):
             if checkhorizontal(board, word, row, col):
                 for i in range(col, len(word) + col):
                     board[i][row] = word[i - col]
@@ -203,7 +204,7 @@ def add_unplaced_words(board, unplaced_words):
     '''
     for word in unplaced_words:
         test = True
-        for row in range(20 - len(word) + 1):
+        for row in range(board_size - len(word) + 1):
             for col in range(19):
                 if checkvertical(board, word, row, col) and test:
                     for i in range(row, len(word) + row):
@@ -215,7 +216,7 @@ def add_unplaced_words(board, unplaced_words):
                     break
 
         for row in range(19):
-            for col in range(20 - len(word) + 1):
+            for col in range(board_size - len(word) + 1):
                 if checkhorizontal(board, word, row, col) and test:
                     for i in range(col, len(word) + col):
                         board[i][row] = word[i - col]
@@ -231,7 +232,7 @@ def crossword(l):
     Print the crossword made of these strings
     If a string cannot be added, print the word and the error message
     '''
-    board = [[blank] * 20 for i in range(20)]
+    board = [[blank] * board_size for i in range(board_size)]
     addwords(board, l)
     add_unplaced_words(board, unplaced_words)
 
