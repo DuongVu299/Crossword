@@ -1,12 +1,14 @@
-# DUONG VU
-# STUDENT ID: 500941776
-# SECTION 6
+board_size = int(input("How big do you want the grid? "))
+while type(board_size) != int:
+    board_size = int(input("Grid size must be an integer, enter grid size again: "))
 
 blank = " "
-board_size = int(input("How big do you want the grid?"))
-board = [[blank] * board_size for i in range(board_size)]                       # Create a 20x20 grid
+board = [[blank] * board_size for i in range(board_size)]                       # Create a grid size board_size x board_size
 
 num_words = int(input("How many words to make crossword: "))
+while type(num_words) != int:
+    num_words = int(input("Word number must be an integer, enter word number again: "))
+
 l = []
 
 for i in range(num_words):
@@ -17,10 +19,9 @@ unplaced_words = []
 
 def printboard(board):
     '''
-    Assumes the parameter board is a 20x20 2 dimensional array,
+    Assumes the parameter board is a 2 dimensional array,
     Print every element of that array into a grid.
     '''    
-    #board_size = 20
     for y in range(-2, board_size + 2):
         for x in range(-1, board_size + 1):
             if y == -2 or y == board_size + 1:
@@ -44,7 +45,7 @@ def printboard(board):
 
 def addFirstWord(board, word):
     '''
-    Assumes the parameter: board is a 20x20 2d array, word is a string.
+    Assumes the parameter: board is a 2d array, word is a string.
     Add the word to the center of the grid.
     '''
     col = board_size // 2 - len(word) // 2
@@ -57,7 +58,7 @@ def addFirstWord(board, word):
 def checkvertical(board, word, row, col):
     '''
     Assumes the parameter:
-    board is a 20x20 2d array,
+    board is a 2d array,
     word is a string,
     row and col are 2 integers.
     Check if the word can be added to the board vertically at the given row and column.
@@ -104,7 +105,7 @@ def checkvertical(board, word, row, col):
 def addvertical(board, word):
     '''
     Assumes the parameter:
-    board is a 20x20 2d array,
+    board is a 2d array,
     word is a string,
     Add the word to the grid vertically.
     '''
@@ -122,7 +123,7 @@ def addvertical(board, word):
 def checkhorizontal(board, word, row, col):
     '''
     Assumes the parameter:
-    board is a 20x20 2d array,
+    board is a 2d array,
     word is a string,
     row and col are 2 integers.
     Check if the word can be added to the board horizontally at the given row and column.
@@ -169,7 +170,7 @@ def checkhorizontal(board, word, row, col):
 def addhorizontal(board, word):
     '''
     Assumes the parameter:
-    board is a 20x20 2d array,
+    board is a 2d array,
     word is a string,
     Add the word to the grid horizontally.
     '''
@@ -186,7 +187,7 @@ def addhorizontal(board, word):
 
 def addwords(board, l):
     '''
-    Assumes the parameter: board is a 20x20 2d array, l is a list of strings
+    Assumes the parameter: board is a 2d array, l is a list of strings
     Add the strings to the grid to form a crossword.
     '''
     for i in range(len(l)):
@@ -199,7 +200,7 @@ def addwords(board, l):
 
 def add_unplaced_words(board, unplaced_words):
     '''
-    Assumes the parameter: board is a 20x20 2d array, unplaced_words is a list of strings
+    Assumes the parameter: board is a 2d array, unplaced_words is a list of strings
     Iterate through the unplaced words and add them to the board (if possible)
     '''
     for word in unplaced_words:
