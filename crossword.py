@@ -1,13 +1,15 @@
-board_size = int(input("How big do you want the grid? "))
-while type(board_size) != int:
-    board_size = int(input("Grid size must be an integer, enter grid size again: "))
+board_size = input("How big do you want the grid? ")
+while not board_size.isdigit():
+    board_size = input("Grid size must be an integer, enter grid size again: ")
+board_size = int(board_size)
 
 blank = " "
 board = [[blank] * board_size for i in range(board_size)]                       # Create a grid size board_size x board_size
 
-num_words = int(input("How many words to make crossword: "))
-while type(num_words) != int:
-    num_words = int(input("Word number must be an integer, enter word number again: "))
+num_words = input("How many words to make crossword: ")
+while not num_words.isdigit():
+    num_words = input("Word number must be an integer, enter word number again: ")
+num_words = int(num_words)
 
 l = []
 
@@ -82,7 +84,7 @@ def checkvertical(board, word, row, col):
                 if col == 0:
                     if board[col + 1][i] != " ":
                         return False
-                if col == 19:
+                if col == board_size - 1:
                     if board[col - 1][i] != " ":
                         return False
                 else:
@@ -147,7 +149,7 @@ def checkhorizontal(board, word, row, col):
                 if row == 0:
                     if board[i][row + 1] != " ":
                         return False
-                if row == 19:
+                if row == board_size - 1:
                     if board[i][row - 1] != " ":
                         return False
                 else:
@@ -206,7 +208,7 @@ def add_unplaced_words(board, unplaced_words):
     for word in unplaced_words:
         test = True
         for row in range(board_size - len(word) + 1):
-            for col in range(19):
+            for col in range(board_size - 1):
                 if checkvertical(board, word, row, col) and test:
                     for i in range(row, len(word) + row):
                         board[col][i] = word[i - row]
@@ -216,7 +218,7 @@ def add_unplaced_words(board, unplaced_words):
                     test = False
                     break
 
-        for row in range(19):
+        for row in range(board_size - 1):
             for col in range(board_size - len(word) + 1):
                 if checkhorizontal(board, word, row, col) and test:
                     for i in range(col, len(word) + col):
