@@ -14,7 +14,7 @@ num_words = int(num_words)
 words = []
 
 for i in range(num_words):
-    words.append(input("Enter word: "))
+    words.append(input("Enter word %s: " %(i + 1)))
 
 placed_words = []  # Create a list of placed and unplaced words on the grid
 unplaced_words = []
@@ -29,21 +29,21 @@ def print_board():
         for x in range(-1, board_size + 1):
             if y == -2 or y == board_size + 1:
                 if x == -1 or x == board_size:
-                    print(" ", end="")
+                    print(" ", end=" ")
                 else:
-                    print(x % 10, end="")
+                    print(x % 10, end=" ")
             elif y == -1 or y == board_size:
                 if x == -1 or x == board_size:
-                    print(" ", end="")
+                    print(" ", end=" ")
                 else:
-                    print("_", end="")
+                    print("_", end=" ")
             else:
                 if x == -1:
-                    print("|", end="")
+                    print("|", end=" ")
                 elif x == board_size:
                     print("|", end=str(y))
                 else:
-                    print(board[x][y], end="")
+                    print(board[x][y], end=" ")
         print("")
 
 
