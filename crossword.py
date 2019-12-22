@@ -14,7 +14,7 @@ num_words = int(num_words)
 words = []
 
 for i in range(num_words):
-    words.append(input("Enter word %s: " %(i + 1)))
+    words.append(input("Enter word %s: " % (i + 1)))
 
 placed_words = []  # Create a list of placed and unplaced words on the grid
 unplaced_words = []
