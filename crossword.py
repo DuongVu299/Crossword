@@ -121,10 +121,9 @@ def add_vertical(word):
                 for i in range(row, len(word) + row):
                     board[col][i] = word[i - row]
                 placed_words.append(word)
-                return True
+                return
 
     unplaced_words.append(word)
-    return False
 
 
 def check_horizontal(word, row, col):
@@ -188,10 +187,9 @@ def add_horizontal(word):
                 for i in range(col, len(word) + col):
                     board[i][row] = word[i - col]
                 placed_words.append(word)
-                return True
+                return
 
     unplaced_words.append(word)
-    return False
 
 
 def add_words():
